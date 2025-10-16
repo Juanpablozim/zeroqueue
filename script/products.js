@@ -9,7 +9,6 @@ var productsList = document.getElementById('productsList');
 var productCount = document.getElementById('productCount');
 var searchInput = document.getElementById('searchInput');
 var btnClear = document.getElementById('btnClear');
-var btnExport = document.getElementById('btnExport');
 
 // Renderizar lista de produtos
 function renderProducts() {
@@ -241,7 +240,6 @@ function hideMessage() {
 // Event listeners
 productForm.onsubmit = addProduct;
 btnClear.onclick = clearForm;
-btnExport.onclick = exportJSON;
 searchInput.oninput = searchProducts;
 
 // Inicializar

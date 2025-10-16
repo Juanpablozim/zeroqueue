@@ -1,0 +1,84 @@
+{
+  "products": [
+    {
+      "barcode": "7891234567890",
+      "name": "Arroz Tio João 5kg",
+      "price": 25.90,
+      "weight": 5.0,
+      "category": "Alimentos",
+      "image": ""
+    },
+    {
+      "barcode": "7891234567891",
+      "name": "Feijão Camil 1kg",
+      "price": 8.50,
+      "weight": 1.0,
+      "category": "Alimentos",
+      "image": ""
+    },
+    {
+      "barcode": "7891234567892",
+      "name": "Açucar União 1kg",
+      "price": 4.20,
+      "weight": 1.0,
+      "category": "Alimentos",
+      "image": ""
+    },
+    {
+      "barcode": "7891234567893",
+      "name": "Café Pilão 500g",
+      "price": 12.80,
+      "weight": 0.5,
+      "category": "Bebidas",
+      "image": ""
+    },
+    {
+      "barcode": "7891234567894",
+      "name": "Óleo de Soja 900ml",
+      "price": 6.90,
+      "weight": 0.9,
+      "category": "Alimentos",
+      "image": ""
+    },
+    {
+      "barcode": "7891234567895",
+      "name": "Macarrão Barilla 500g",
+      "price": 7.50,
+      "weight": 0.5,
+      "category": "Alimentos",
+      "image": ""
+    },
+    {
+      "barcode": "7891234567896",
+      "name": "Leite Integral 1L",
+      "price": 5.80,
+      "weight": 1.03,
+      "category": "Laticinios",
+      "image": ""
+    },
+    {
+      "barcode": "7891234567897",
+      "name": "Sabão em Po 1kg",
+      "price": 11.90,
+      "weight": 1.0,
+      "category": "Limpeza",
+      "image": ""
+    },
+    {
+      "barcode": "7891234567898",
+      "name": "Papel Higienico 12un",
+      "price": 18.50,
+      "weight": 2.0,
+      "category": "Higiene",
+      "image": ""
+    },
+    {
+      "barcode": "7891234567899",
+      "name": "Refrigerante 2L",
+      "price": 8.90,
+      "weight": 2.1,
+      "category": "Bebidas",
+      "image": ""
+    }
+  ]
+}

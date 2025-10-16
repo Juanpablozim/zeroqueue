@@ -1,7 +1,6 @@
 // Estado da aplicacao
 var products = [];
 var allProducts = [];
-var jsonName = 'bd/products.json';
 
 // Elementos DOM
 var productForm = document.getElementById('productForm');
@@ -11,24 +10,6 @@ var productCount = document.getElementById('productCount');
 var searchInput = document.getElementById('searchInput');
 var btnClear = document.getElementById('btnClear');
 var btnExport = document.getElementById('btnExport');
-
-// Carregar produtos do JSON
-function loadProducts() {
-    fetch(jsonName)
-        .then(function(response) {
-            return response.json();
-        })
-        .then(function(data) {
-            products = data.products || [];
-            allProducts = products.slice(); // copia para busca
-            renderProducts();
-            updateProductCount();
-        })
-        .catch(function(error) {
-            console.error('Erro ao carregar produtos:', error);
-            productsList.innerHTML = '<p class="empty-state">Erro ao carregar produtos</p>';
-        });
-}
 
 // Renderizar lista de produtos
 function renderProducts() {
@@ -72,7 +53,6 @@ function addProduct(event) {
     var category = document.getElementById('category').value;
     var image = document.getElementById('image').value.trim();
 
-    // Verificar se codigo ja existe
     var exists = false;
     for (var i = 0; i < products.length; i++) {
         if (products[i].barcode === barcode) {
@@ -86,7 +66,6 @@ function addProduct(event) {
         return;
     }
 
-    // Criar novo produto
     var newProduct = {
         barcode: barcode,
         name: name,
@@ -96,14 +75,11 @@ function addProduct(event) {
         image: image
     };
 
-    // Adicionar ao array
     products.push(newProduct);
     allProducts = products.slice();
 
-    // Salvar no localStorage (simulacao)
     saveProducts();
 
-    // Atualizar interface
     renderProducts();
     updateProductCount();
     productForm.reset();
@@ -126,7 +102,6 @@ function editProduct(barcode) {
 
     if (!product) return;
 
-    // Preencher formulario
     document.getElementById('barcode').value = product.barcode;
     document.getElementById('name').value = product.name;
     document.getElementById('price').value = product.price;
@@ -134,10 +109,8 @@ function editProduct(barcode) {
     document.getElementById('category').value = product.category;
     document.getElementById('image').value = product.image;
 
-    // Remover produto (sera re-adicionado ao salvar)
     deleteProduct(barcode, true);
 
-    // Scroll para o formulario
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -208,13 +181,26 @@ function loadFromLocalStorage() {
     if (stored) {
         var data = JSON.parse(stored);
         products = data.products || [];
-        allProducts = products.slice();
-        renderProducts();
-        updateProductCount();
     } else {
-        loadProducts();
+        products = [
+            { "barcode": "7891234567890", "name": "Arroz Tio João 5kg", "price": 25.90, "weight": 5.0, "category": "Alimentos", "image": "" },
+            { "barcode": "7891234567891", "name": "Feijão Camil 1kg", "price": 8.50, "weight": 1.0, "category": "Alimentos", "image": "" },
+            { "barcode": "7891234567892", "name": "Açucar União 1kg", "price": 4.20, "weight": 1.0, "category": "Alimentos", "image": "" },
+            { "barcode": "7891234567893", "name": "Café Pilão 500g", "price": 12.80, "weight": 0.5, "category": "Bebidas", "image": "" },
+            { "barcode": "7891234567894", "name": "Óleo de Soja 900ml", "price": 6.90, "weight": 0.9, "category": "Alimentos", "image": "" },
+            { "barcode": "7891234567895", "name": "Macarrão Barilla 500g", "price": 7.50, "weight": 0.5, "category": "Alimentos", "image": "" },
+            { "barcode": "7891234567896", "name": "Leite Integral 1L", "price": 5.80, "weight": 1.03, "category": "Laticinios", "image": "" },
+            { "barcode": "7891234567897", "name": "Sabão em Po 1kg", "price": 11.90, "weight": 1.0, "category": "Limpeza", "image": "" },
+            { "barcode": "7891234567898", "name": "Papel Higienico 12un", "price": 18.50, "weight": 2.0, "category": "Higiene", "image": "" },
+            { "barcode": "7891234567899", "name": "Refrigerante 2L", "price": 8.90, "weight": 2.1, "category": "Bebidas", "image": "" }
+        ];
+        saveProducts();
     }
+    allProducts = products.slice();
+    renderProducts();
+    updateProductCount();
 }
+
 
 // Exportar JSON
 function exportJSON() {
@@ -226,10 +212,10 @@ function exportJSON() {
     var url = URL.createObjectURL(blob);
     var a = document.createElement('a');
     a.href = url;
-    a.download = jsonName;
+    a.download = 'products-backup.json';
     a.click();
     URL.revokeObjectURL(url);
-    showMessage('JSON exportado com sucesso!', 'success');
+    showMessage('Backup JSON exportado com sucesso!', 'success');
     setTimeout(function() {
         hideMessage();
     }, 3000);
